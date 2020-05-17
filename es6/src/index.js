@@ -39,7 +39,7 @@
 // let target = new Target();
 // let res = target.request();
 // console.log(res);
-
+//-------------------分割线-------------------------
 //装饰器模式
 // class Circle {
 //   draw() {
@@ -123,3 +123,93 @@
 // let math = new Math();
 // const result = math.add(2,3);
 // console.log('result',result);
+
+//------------代理模式---------
+//明星经纪人案例
+
+//明星
+// let star = {
+//   name: "jeff",
+//   age: 18,
+//   phone: "start:12345670986"
+// };
+
+// //经纪人
+// let agent = new Proxy(star, {
+//   get: function(target, key) {
+//     if (key === "phone") {
+//       //返回经纪人的电话
+//       return "agent:13456789065";
+//     }
+//     if (key === "price") {
+//       return 120000;
+//     }
+//     return target[key];
+//   },
+//   set: function(target, key, val) {
+//     if (key === "customPrice") {
+//       if (val < 100000) {
+//         throw new Error("价格太低，暂时不接收服务");
+//       } else {
+//         target[key] = val;
+//         return true;
+//       }
+//     }
+//   }
+// });
+
+// //测试
+// console.log(agent.name)
+// console.log(agent.age);
+// console.log(agent.phone);
+// console.log(agent.price);
+
+// agent.customPrice = 90000;
+// console.log(agent.customPrice);
+
+//----------------分割线-------------------//
+
+//观察者模式
+// class Subject {
+//   constructor() {
+//     this.state = 0;
+//     this.observers = [];
+//   }
+//   getState() {
+//     return this.state;
+//   }
+//   setState(state) {
+//     this.state = state;
+//     this.notifyAllObservers();
+//   }
+
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => {
+//       observer.update();
+//     });
+//   }
+
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+// class Observer {
+//   constructor(name, subject) {
+//     this.name = name;
+//     this.subject = subject;
+//     this.subject.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name} update,state:${this.subject.getState()}`)  
+//   }
+// }
+
+// //测试
+// let s = new Subject();
+// let o1 = new Observer('o1',s);
+// let o2 = new Observer('o2',s);
+// let o3 = new Observer('o3',s);
+
+// s.setState(1);
+// s.setState(2);
+// s.setState(3);
